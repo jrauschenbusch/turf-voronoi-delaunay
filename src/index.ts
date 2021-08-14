@@ -14,10 +14,11 @@ interface Options {
  *
  * The Voronoi algorithim used comes from the d3-delaunay package.
  *
- * @name voronoiDelaunay
+ * @name voronoi
  * @param {FeatureCollection<Point>} points to find the Voronoi polygons around.
- * @param {Object} [options={}] Optional parameters
- * @param {number[]} [options.bbox=[-180, -85, 180, -85]] clipping rectangle, in [minX, minY, maxX, MaxY] order.
+ * @param {Options} [options={ keepProperties: false, bbox: [-180, -85, 180, -85] }] Optional parameters
+ * @param {boolean} [options.keepProperties=false] switch to enable/disable preservation of feature properties
+ * @param {BBox} [options.bbox=[-180, -85, 180, -85]] clipping rectangle, in [minX, minY, maxX, MaxY] order.
  * @returns {FeatureCollection<Polygon>} a set of polygons, one per input point.
  * @example
  * const options = {
@@ -29,8 +30,11 @@ interface Options {
  * //addToMap
  * const addToMap = [voronoiPolygons, points];
  */
-function voronoiDelaunay (points: FeatureCollection<Point>, options: Options = {}): FeatureCollection<Polygon> {
-  const bbox = options.bbox ?? [-180, -85, 180, 85]
+function voronoi (points: FeatureCollection<Point>, options: Options = { keepProperties: false, bbox: [-180, -85, 180, 85] }): FeatureCollection<Polygon> {
+  if (options.bbox === null || options.bbox === undefined) {
+    throw new Error('bbox must not be null or undefined')
+  }
+  const bbox = options.bbox
   collectionOf(points, 'Point', 'points')
 
   const fc = featureCollection(
@@ -48,4 +52,4 @@ function voronoiDelaunay (points: FeatureCollection<Point>, options: Options = {
   return fc
 }
 
-export default voronoiDelaunay
+export default voronoi

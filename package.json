@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist && npm test && tsc",
+    "docs": "node ./scripts/generate-readmes",
     "test": "jest src && eslint src"
   },
   "repository": {
@@ -39,14 +40,17 @@
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.29.1",
     "babel-jest": "^27.0.6",
+    "documentation": "^13.2.5",
     "eslint": "^7.32.0",
     "eslint-config-standard-with-typescript": "^20.0.0",
     "eslint-plugin-import": "^2.24.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-standard": "^5.0.0",
+    "fs-extra": "^10.0.0",
     "glob": "^7.1.7",
     "jest": "^27.0.6",
+    "js-yaml": "^3.14.1",
     "load-json-file": "^6.0.0",
     "ts-jest": "^27.0.4",
     "ts-node": "^10.2.0",
