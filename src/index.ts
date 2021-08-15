@@ -30,11 +30,9 @@ interface Options {
  * //addToMap
  * const addToMap = [voronoiPolygons, points];
  */
-function voronoi (points: FeatureCollection<Point>, options: Options = { keepProperties: false, bbox: [-180, -85, 180, 85] }): FeatureCollection<Polygon> {
-  if (options.bbox === null || options.bbox === undefined) {
-    throw new Error('bbox must not be null or undefined')
-  }
-  const bbox = options.bbox
+function voronoi (points: FeatureCollection<Point>, options?: Options): FeatureCollection<Polygon> {
+  const bbox = options?.bbox ?? [-180, -85, 180, 85]
+  if (!Array.isArray(bbox)) throw new Error('bbox is invalid')
   collectionOf(points, 'Point', 'points')
 
   const fc = featureCollection(
@@ -43,7 +41,7 @@ function voronoi (points: FeatureCollection<Point>, options: Options = { keepPro
       .cellPolygons())
       .map((p: Delaunay.Polygon) => polygon([p])))
 
-  if (options.keepProperties === true) {
+  if (options?.keepProperties === true) {
     fc.features.forEach((polygon: Feature, i: number) => {
       polygon.properties = JSON.parse(JSON.stringify(points.features[i].properties))
     })
