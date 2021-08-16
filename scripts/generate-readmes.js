@@ -37,7 +37,7 @@ packages.forEach(packagePath => {
 
         // Format Markdown
         documentation.formats.md(res, {paths}).then(markdown => {
-            markdown = `# ${name}\n\n{prefix}\n\n${markdown}${postfix.replace(/{module}/, name)}`;
+            markdown = `# ${name}\n\n${prefix}\n\n${markdown}${postfix.replace(/{module}/, name)}`;
             if (diagrams.length) markdown += '\n\n### Diagrams\n\n' + diagramToMarkdown(diagrams);
             fs.writeFileSync(path.join(directory, 'README.md'), markdown);
         }).catch(error => console.warning(error));
