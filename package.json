@@ -14,7 +14,7 @@
     "clean": "shx rm -rf coverage dist",
     "docs": "node ./scripts/generate-readmes",
     "lint": "eslint src",
-    "release": "npm run upgrade && npm run clean && npm run build && npm test && npm run bump",
+    "release": "npm run clean && npm run build && npm test && npm run bump",
     "test": "jest --collect-coverage src && npm run lint",
     "upgrade": "npm-check -u && npm audit fix",
     "watch": "tsc --watch"
