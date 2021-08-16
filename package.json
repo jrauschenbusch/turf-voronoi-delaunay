@@ -2,12 +2,25 @@
   "name": "turf-voronoi-delaunay",
   "version": "0.0.1",
   "description": "turf voronoi module based on d3-delaunay",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rm -rf dist && npm test && tsc",
+    "build": "npm run build:typescript",
+    "build:typescript": "tsc --declaration",
+    "bump": "bump --tag --push --all && git push --tags --force",
+    "clean": "shx rm -rf coverage dist",
     "docs": "node ./scripts/generate-readmes",
     "lint": "eslint src",
-    "test": "jest src && eslint src"
+    "release": "npm run upgrade && npm run clean && npm run build && npm test && npm run bump",
+    "test": "jest --collect-coverage src && npm run lint",
+    "upgrade": "npm-check -u && npm audit fix",
+    "watch": "tsc --watch"
+  },
+  "engines": {
+    "node": ">=10"
   },
   "repository": {
     "type": "git",
@@ -34,6 +47,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-typescript": "^7.15.0",
+    "@jsdevtools/version-bump-prompt": "^6.1.0",
     "@types/d3-delaunay": "^6.0.0",
     "@types/glob": "^7.1.4",
     "@types/jest": "^26.0.24",
@@ -53,6 +67,8 @@
     "jest": "^27.0.6",
     "js-yaml": "^3.14.1",
     "load-json-file": "^6.0.0",
+    "npm-check": "^5.9.2",
+    "shx": "^0.3.3",
     "ts-jest": "^27.0.4",
     "ts-node": "^10.2.0",
     "ts-node-dev": "^1.1.8",
