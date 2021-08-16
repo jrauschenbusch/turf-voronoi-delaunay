@@ -1,6 +1,6 @@
 name: 'turf-voronoi-delaunay'
 sources:
-  node: true
+  npm: true
 allowed:
   - mit
   - apache-2.0
