@@ -18,6 +18,7 @@ const packages = currentFolder.includes('turf-') ?
     glob.sync(path.join(__dirname, '..', 'packages', 'turf-*', 'package.json'));
 
 // Template for README Markdown
+const prefix = fs.readFileSync(path.join(__dirname, 'prefix.md'), 'utf8');
 const postfix = fs.readFileSync(path.join(__dirname, 'postfix.md'), 'utf8');
 
 const paths = yaml.load(fs.readFileSync(path.join(__dirname, '..', 'documentation.yml'), 'utf8')).paths;
@@ -36,7 +37,7 @@ packages.forEach(packagePath => {
 
         // Format Markdown
         documentation.formats.md(res, {paths}).then(markdown => {
-            markdown = `# ${name}\n\n${markdown}${postfix.replace(/{module}/, name)}`;
+            markdown = `# ${name}\n\n{prefix}\n\n${markdown}${postfix.replace(/{module}/, name)}`;
             if (diagrams.length) markdown += '\n\n### Diagrams\n\n' + diagramToMarkdown(diagrams);
             fs.writeFileSync(path.join(directory, 'README.md'), markdown);
         }).catch(error => console.warning(error));
