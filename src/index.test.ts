@@ -3,7 +3,7 @@ import { FeatureCollection, Point } from '@turf/helpers'
 import glob from 'glob'
 import load from 'load-json-file'
 import path from 'path'
-import voronoiDelaunay from './index'
+import { voronoi } from './index'
 import write from 'write-json-file'
 
 describe('basic', () => {
@@ -20,7 +20,7 @@ describe('basic', () => {
       const expected = load.sync(out)
 
       // act
-      const results = voronoiDelaunay(geojson, { bbox: geojson.bbox })
+      const results = voronoi(geojson, { bbox: geojson.bbox })
       if (process.env.REGEN !== undefined) write.sync(out, results)
 
       // assert
@@ -43,7 +43,7 @@ describe('keep-properties', () => {
       const expected = load.sync(out)
 
       // act
-      const result = voronoiDelaunay(geojson, { keepProperties: true, bbox: geojson.bbox })
+      const result = voronoi(geojson, { keepProperties: true, bbox: geojson.bbox })
       if (process.env.REGEN !== undefined) write.sync(out, result)
 
       // assert
