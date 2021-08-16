@@ -1,6 +1,6 @@
 ---
 name: d3-delaunay
-version: 6.0.2
+version: 5.3.0
 type: npm
 summary: Compute the Voronoi diagram of a set of two-dimensional points.
 homepage: https://github.com/d3/d3-delaunay
@@ -8,8 +8,7 @@ license: isc
 licenses:
 - sources: LICENSE
   text: |
-    Copyright 2018-2021 Observable, Inc.
-    Copyright 2021 Mapbox
+    Copyright 2018 Observable, Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any purpose
     with or without fee is hereby granted, provided that the above copyright notice
