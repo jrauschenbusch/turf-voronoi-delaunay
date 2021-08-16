@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [10.x, 12.x, 14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -36,9 +36,7 @@ jobs:
       run: npm test
 
   license-check:
-    
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - uses: jonabc/setup-licensed@v1
@@ -60,3 +58,16 @@ jobs:
             issue_number: ${{ steps.licensed.outputs.pr_number }}
             body: 'My custom PR message'
           })
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: npm install
+      - run: npm test
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
