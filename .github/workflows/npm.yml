@@ -1,0 +1,27 @@
+name: NPM Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [build, license-check]
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+      - name: Install NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build code
+        run: npm run build
+      - name: Publish to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          dry-run: true
