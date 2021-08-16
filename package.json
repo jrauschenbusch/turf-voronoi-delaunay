@@ -4,7 +4,7 @@
   "description": "turf voronoi module based on d3-delaunay",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && npm test && tsc",
+    "build": "rm -rf dist && npm test && tsc --declaration",
     "docs": "node ./scripts/generate-readmes",
     "lint": "eslint src",
     "test": "jest src && eslint src"
