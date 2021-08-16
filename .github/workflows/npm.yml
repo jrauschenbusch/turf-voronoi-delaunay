@@ -8,7 +8,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [build, license-check]
     steps:
       - name: Checkout source
         uses: actions/checkout@v2
