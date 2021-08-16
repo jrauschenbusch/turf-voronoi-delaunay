@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rm -rf dist && npm test && tsc",
     "docs": "node ./scripts/generate-readmes",
+    "lint": "eslint src",
     "test": "jest src && eslint src"
   },
   "repository": {
