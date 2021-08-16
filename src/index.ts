@@ -1,4 +1,5 @@
-import { BBox, Feature, FeatureCollection, Point, Polygon, featureCollection, polygon } from '@turf/helpers'
+import type { BBox, Feature, FeatureCollection, Point, Polygon } from '@turf/helpers'
+import { featureCollection, polygon } from '@turf/helpers'
 
 import { Delaunay } from 'd3-delaunay'
 import { collectionOf } from '@turf/invariant'
@@ -30,7 +31,7 @@ interface Options {
  * //addToMap
  * const addToMap = [voronoiPolygons, points];
  */
-function voronoi (points: FeatureCollection<Point>, options?: Options): FeatureCollection<Polygon> {
+export function voronoi (points: FeatureCollection<Point>, options?: Options): FeatureCollection<Polygon> {
   const bbox = options?.bbox ?? [-180, -85, 180, 85]
   if (!Array.isArray(bbox)) throw new Error('bbox is invalid')
   collectionOf(points, 'Point', 'points')
@@ -49,5 +50,3 @@ function voronoi (points: FeatureCollection<Point>, options?: Options): FeatureC
 
   return fc
 }
-
-export default voronoi
