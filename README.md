@@ -18,10 +18,10 @@ The Voronoi algorithim used comes from the d3-delaunay package.
 ### Parameters
 
 *   `points` **[FeatureCollection][1]<[Point][2]>** to find the Voronoi polygons around.
-*   `options` **Options** Optional parameters (optional, default `{keepProperties:false,bbox:[-180,-85,180,-85]}`)
+*   `options` **Options** Optional parameters (optional, default `{keepProperties:false,bbox:[-180,-85,180,85]}`)
 
     *   `options.keepProperties` **[boolean][3]** switch to enable/disable preservation of feature properties (optional, default `false`)
-    *   `options.bbox` **[BBox][4]** clipping rectangle, in \[minX, minY, maxX, MaxY] order. (optional, default `[-180,-85,180,-85]`)
+    *   `options.bbox` **[BBox][4]** clipping rectangle, in \[minX, minY, maxX, MaxY] order. (optional, default `[-180,-85,180,85]`)
 
 ### Examples
 
